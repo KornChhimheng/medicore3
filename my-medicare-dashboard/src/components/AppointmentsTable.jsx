@@ -81,7 +81,7 @@ const AppointmentsTable = ({ appointments }) => {
                       ) : (
                         <span className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold text-sm">
                           {/* Get initials for avatar placeholder */}
-                          {appointment.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                          {(appointment.name || '').split(' ').map(n => n[0]).join('').toUpperCase()}
                         </span>
                       )}
                     </div>

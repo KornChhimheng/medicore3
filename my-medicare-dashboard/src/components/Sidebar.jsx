@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 // Import Lucide React icons for modern, attractive visuals
 import {
   Home,
@@ -10,15 +11,13 @@ import {
   LogOut,
 } from "lucide-react";
 
-// Sidebar component now accepts currentPage and onPageChange props
-const Sidebar = ({ currentPage, onPageChange }) => {
-  const handleNavigationClick = (page) => {
-    onPageChange(page);
-  };
+// Sidebar component now uses React Router
+const Sidebar = () => {
+  const location = useLocation();
 
-  const getNavLinkClass = (page) => {
+  const getNavLinkClass = (path) => {
     return `flex items-center p-3 font-semibold transition-colors duration-200 ${
-      currentPage === page
+      location.pathname === path
         ? "bg-blue-600 text-white rounded-xl" // Active link: darker blue background, white text, keep rounded for internal elements
         : "text-gray-200 hover:bg-white hover:text-blue-700 rounded-xl" // Default text color, and hover: white background, blue text, keep rounded for internal elements
     }`;
@@ -60,64 +59,40 @@ const Sidebar = ({ currentPage, onPageChange }) => {
           {/* flex-grow to push logout to bottom */}
           <ul>
             <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("dashboard")}
-                className={getNavLinkClass("dashboard")}
+              <Link
+                to="/patient"
+                className={getNavLinkClass("/patient")}
               >
                 <Home size={24} className="mr-3" /> {/* Lucide Icon */}
-                Dashboard
-              </a>
+                Patient Dashboard
+              </Link>
             </li>
             <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("appointments")}
-                className={getNavLinkClass("appointments")}
+              <Link
+                to="/receptionist"
+                className={getNavLinkClass("/receptionist")}
               >
-                <CalendarCheck size={24} className="mr-3" /> {/* Lucide Icon */}
-                Appointments
-              </a>
+                <UserRoundCog size={24} className="mr-3" /> {/* Lucide Icon */}
+                Receptionist Dashboard
+              </Link>
             </li>
             <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("prescriptions")}
-                className={getNavLinkClass("prescriptions")}
-              >
-                <Pill size={24} className="mr-3" /> {/* Lucide Icon */}
-                Prescriptions
-              </a>
-            </li>
-            <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("billing")}
-                className={getNavLinkClass("billing")}
+              <Link
+                to="/billing"
+                className={getNavLinkClass("/billing")}
               >
                 <Wallet size={24} className="mr-3" /> {/* Lucide Icon */}
                 Billing
-              </a>
+              </Link>
             </li>
             <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("patientManagement")}
-                className={getNavLinkClass("patientManagement")}
+              <Link
+                to="/prescriptions"
+                className={getNavLinkClass("/prescriptions")}
               >
-                <Users size={24} className="mr-3" /> {/* Lucide Icon */}
-                Patient Management
-              </a>
-            </li>
-            <li className="mb-4">
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("receptionistDashboard")}
-                className={getNavLinkClass("receptionistDashboard")}
-              >
-                <UserRoundCog size={24} className="mr-3" /> {/* Lucide Icon */}
-                Receptionist
-              </a>
+                <Pill size={24} className="mr-3" /> {/* Lucide Icon */}
+                Prescriptions
+              </Link>
             </li>
           </ul>
         </nav>

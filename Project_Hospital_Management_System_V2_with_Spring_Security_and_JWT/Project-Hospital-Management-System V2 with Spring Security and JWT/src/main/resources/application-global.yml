@@ -1,11 +1,11 @@
-  #Config DataBase
+#Config DataBase
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/hospital_management
     username: postgres
-    password: menghour123
+    password: vich1103
     driver-class-name: org.postgresql.Driver
-    hikari: 
+    hikari:
       pool-name: HospitalManagementAPI
       maximum-pool-size: 10
       minimum-idle: 5
@@ -16,5 +16,5 @@ spring:
       validation-timeout: 5000
   jpa:
     hibernate:
-      ddl-auto: update  #update #create-drop 
+      ddl-auto: update #update #create-drop
     show-sql: true

@@ -1,16 +1,57 @@
 import React, { useState } from 'react';
 
-const MedicationLookup = ({
-  medicationName,
-  setMedicationName,
-  medicationInfo,
-  setMedicationInfo,
-  isLoadingMedInfo,
-  setIsLoadingMedInfo,
-  medInfoError,
-  setMedInfoError,
-  getMedicationInformation,
-}) => {
+const MedicationLookup = () => {
+  const [medicationName, setMedicationName] = useState('');
+  const [medicationInfo, setMedicationInfo] = useState('');
+  const [isLoadingMedInfo, setIsLoadingMedInfo] = useState(false);
+  const [medInfoError, setMedInfoError] = useState('');
+
+  // Function to fetch medication information using Gemini API
+  const getMedicationInformation = async () => {
+    if (!medicationName.trim()) {
+      setMedInfoError("Please enter a medication name.");
+      setMedicationInfo(""); // Clear previous info if validation fails
+      return;
+    }
+
+    setIsLoadingMedInfo(true);
+    setMedInfoError(""); // Clear previous errors
+    setMedicationInfo(""); // Clear previous info on new search
+
+    try {
+      const prompt = `Provide a concise summary about the medication "${medicationName}". Include its primary uses and common side effects.`;
+      
+      let chatHistory = [];
+      chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+      const payload = { contents: chatHistory };
+      const apiKey = ""; // Canvas will automatically provide the API key
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.candidates && result.candidates.length > 0 &&
+          result.candidates[0].content && result.candidates[0].content.parts &&
+          result.candidates[0].content.parts.length > 0) {
+        const text = result.candidates[0].content.parts[0].text;
+        setMedicationInfo(text);
+      } else {
+        setMedInfoError("Could not retrieve information. Please try again.");
+        console.error("Gemini API response structure unexpected:", result);
+      }
+    } catch (error) {
+      console.error("Error fetching medication info:", error);
+      setMedInfoError("Failed to fetch information. Please check your network connection or try again later.");
+    } finally {
+      setIsLoadingMedInfo(false);
+    }
+  };
   return (
     <div className="bg-white p-6 rounded-2xl shadow-lg mb-8">
       <h3 className="text-xl font-semibold text-gray-800 mb-4">Medication Information Lookup ✨</h3>

@@ -1,7 +1,7 @@
 import React from 'react';
 // IMPORTANT: Import your receptionist image here.
 // Replace 'your-receptionist-image.png' with the actual filename of your image.
-import receptionistImage from '../../assets/doctor.png'; // Example path, adjust if your image is elsewhere
+import receptionistImage from '../assets/doctor.png'; // Example path, adjust if your image is elsewhere
 
 const ReceptionistWelcomeCard = () => {
   const [imageSrc, setImageSrc] = React.useState(receptionistImage);

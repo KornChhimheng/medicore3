@@ -6,40 +6,27 @@ import AppointmentsTable from '../components/AppointmentsTable.jsx'; // Path: sr
 import BillingHistoryTable from '../components/BillingHistoryTable.jsx'; // Path: src/pages/ -> src/components/
 
 // This component will represent the main dashboard view for patients.
-// It receives props that contain data and functions managed by the parent App component.
-const PatientDashboard = ({
-  medicationName,
-  setMedicationName,
-  medicationInfo,
-  setMedicationInfo,
-  isLoadingMedInfo,
-  setIsLoadingMedInfo,
-  medInfoError,
-  setMedInfoError,
-  getMedicationInformation,
-  appointments,
-  billingHistory,
-}) => {
+const PatientDashboard = () => {
+  // Mock data for now - will be replaced with API calls
+  const mockAppointments = [
+    { id: 1, name: 'John Doe', date: '2024-01-15', time: '10:00 AM', status: 'Scheduled', situation: 'check' },
+    { id: 2, name: 'John Doe', date: '2024-01-16', time: '2:00 PM', status: 'Completed', situation: 'check' },
+  ];
+
+  const mockBillingHistory = [
+    { id: 1, name: 'John Doe', type: 'General Consultation', amount: 150.00, sendDate: '2024-01-15', dueDate: '2024-01-22', recipient: 'Dr. Smith', status: 'Paid' },
+    { id: 2, name: 'John Doe', type: 'Blood Test', amount: 75.50, sendDate: '2024-01-14', dueDate: '2024-01-21', recipient: 'Lab Corp', status: 'Pending' },
+  ];
   return (
     // The p-8 and w-full classes ensure proper padding and width within the main content area
     <div className="p-8 w-full">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
       <WelcomeCard />
       <InfoCards />
-      <MedicationLookup
-        medicationName={medicationName}
-        setMedicationName={setMedicationName}
-        medicationInfo={medicationInfo}
-        setMedicationInfo={setMedicationInfo}
-        isLoadingMedInfo={isLoadingMedInfo}
-        setIsLoadingMedInfo={setIsLoadingMedInfo}
-        medInfoError={medInfoError}
-        setMedInfoError={setMedInfoError}
-        getMedicationInformation={getMedicationInformation}
-      />
+      <MedicationLookup />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AppointmentsTable appointments={appointments} />
-        <BillingHistoryTable billingHistory={billingHistory} />
+        <AppointmentsTable appointments={mockAppointments} />
+        <BillingHistoryTable billingHistory={mockBillingHistory} />
       </div>
     </div>
   );
