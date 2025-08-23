@@ -1,0 +1,4 @@
+2025-06-21 17:40:34,983 ErrorResponse(status=400 BAD_REQUEST, message=patient Not Found Id=1, url=/patient/1)
+2025-06-21 17:47:03,592 ErrorResponse(status=404 NOT_FOUND, message=patient Not Found Id=1, code=null, url=/patient/1)
+2025-06-21 17:50:02,167 ErrorResponse(status=404 NOT_FOUND, message=patient Not Found Id=1, code=404, url=/patient/1)
+2025-06-21 18:13:09,299 ErrorResponse(status=404 NOT_FOUND, message=patient Not Found Id=1, code=404, url=/patient/1)

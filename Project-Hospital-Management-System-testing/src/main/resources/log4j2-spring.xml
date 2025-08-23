@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p : %m%n</Property>
+        <property name="filePattern">${date:dd-MM-yyyy}</property>
+        <property name="apiFileNamePattern">./logs/hospital-management/api-logging.log</property>
+        <property name="systemFileNamePattern">./logs/hospital-management/system-logging.log</property>
+        <property name="apiBackupFileNamePattern">./logs/hospital-management/backup/${date:yyyy-MM}/api-%d{dd-MM-yyyy}.log</property>
+        <property name="systemBackupFileNamePattern">./logs/hospital-management/backup/${date:yyyy-MM}/system-%d{dd-MM-yyyy}.log</property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+        <RollingFile name="api-log-conf"
+                fileName="${apiFileNamePattern}"
+                filePattern="${apiBackupFileNamePattern}" >
+            <PatternLayout>
+                <pattern>%d %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 GB" />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="system-log-conf"
+                fileName="${systemFileNamePattern}"
+                filePattern="${systemBackupFileNamePattern}" >
+            <PatternLayout>
+                <pattern>%d %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 GB" />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="Console" level="info" />
+        </Root>
+        <!-- Use for logging api request and response info request from mobile app -->
+        <Logger name="api.log" level="debug" additivity="false">
+            <AppenderRef ref="api-log-conf" level="info" />
+        </Logger>
+        <!-- Use for logging api request and response info request from web app -->
+        <Logger name="system.log" level="debug" additivity="false">
+            <AppenderRef ref="system-log-conf" level="info" />
+        </Logger>
+    </Loggers>
+</Configuration>

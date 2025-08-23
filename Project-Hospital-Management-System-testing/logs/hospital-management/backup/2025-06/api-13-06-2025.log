@@ -1,0 +1,7 @@
+2025-06-11 18:11:36,253 ErrorResponse(status=404 NOT_FOUND, message=Patient With id = 1 not found)
+2025-06-11 18:55:06,935 ErrorResponse(status=404 NOT_FOUND, message=Patient With id = 1 not found)
+2025-06-11 19:01:32,061 ErrorResponse(status=404 NOT_FOUND, message=Patient With id = 1 not found)
+2025-06-13 23:36:08,553 ErrorResponse(status=400 BAD_REQUEST, message=patient Not Found Id=1)
+2025-06-13 23:37:46,998 ErrorResponse(status=400 BAD_REQUEST, message=patient Not Found Id=1)
+2025-06-13 23:38:01,624 ErrorResponse(status=400 BAD_REQUEST, message=patient Not Found Id=1)
+2025-06-13 23:39:48,376 ErrorResponse(status=400 BAD_REQUEST, message=patient Not Found Id=1)

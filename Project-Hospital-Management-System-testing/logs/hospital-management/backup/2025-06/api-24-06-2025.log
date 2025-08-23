@@ -1,0 +1,7 @@
+2025-06-24 17:32:46,060 ErrorResponse(status=404 NOT_FOUND, message=User Not Found :NONE_PROVIDED, code=404, url=/auth/login)
+2025-06-24 17:38:36,834 ErrorResponse(status=404 NOT_FOUND, message=User Not Found :NONE_PROVIDED, code=404, url=/auth/login)
+2025-06-24 17:39:25,487 ErrorResponse(status=404 NOT_FOUND, message=User Not Found :NONE_PROVIDED, code=404, url=/auth/login)
+2025-06-24 17:42:48,814 ErrorResponse(status=404 NOT_FOUND, message=User Not Found :NONE_PROVIDED, code=404, url=/auth/login)
+2025-06-24 18:46:06,221 Validation error: Email already has!
+2025-06-24 18:46:07,850 Validation error: Email already has!
+2025-06-24 18:47:05,452 Validation error: Email already has!
