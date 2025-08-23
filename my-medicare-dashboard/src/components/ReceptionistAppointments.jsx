@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
   appointmentAPI,
-  patientAPI,
-  doctorAPI,
 } from "../services/apiService.js";
 import CreateAppointmentForm from "./CreateAppointmentForm.jsx";
 
 const ReceptionistAppointments = () => {
   const [appointments, setAppointments] = useState([]);
-  const [patients, setPatients] = useState({});
-  const [doctors, setDoctors] = useState({});
   const [loading, setLoading] = useState(true);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [error, setError] = useState("");
@@ -17,64 +13,16 @@ const ReceptionistAppointments = () => {
   // Fetch appointments on component mount
   useEffect(() => {
     fetchAppointments();
-    fetchPatientsAndDoctors();
   }, []);
-
-  const fetchPatientsAndDoctors = async () => {
-    try {
-      // Fetch all patients and doctors to populate the lookup objects
-      const patientsResponse = await patientAPI.getPatients();
-      const doctorsResponse = await doctorAPI.getDoctors();
-
-      console.log("Patients response:", patientsResponse);
-      console.log("Doctors response:", doctorsResponse);
-
-      const patientsMap = {};
-      const doctorsMap = {};
-
-      // Handle both direct response and nested data property
-      const patientsData = patientsResponse.data || patientsResponse;
-      const doctorsData = doctorsResponse.data || doctorsResponse;
-
-      if (patientsData && Array.isArray(patientsData)) {
-        patientsData.forEach((patient) => {
-          if (patient.user) {
-            patient.firstName = patient.user.firstName;
-            patient.lastName = patient.user.lastName;
-          }
-          patientsMap[patient.patientId] = patient;
-        });
-      }
-
-      if (doctorsData && Array.isArray(doctorsData)) {
-        doctorsData.forEach((doctor) => {
-          if (doctor.user) {
-            doctor.firstName = doctor.user.firstName;
-            doctor.lastName = doctor.user.lastName;
-          }
-          doctorsMap[doctor.doctorId] = doctor;
-        });
-      }
-
-      console.log("Patients map:", patientsMap);
-      console.log("Doctors map:", doctorsMap);
-
-      setPatients(patientsMap);
-      setDoctors(doctorsMap);
-    } catch (error) {
-      console.error("Error fetching patients and doctors:", error);
-    }
-  };
 
   const fetchAppointments = async () => {
     try {
       setLoading(true);
       const response = await appointmentAPI.getAppointments();
       console.log("Appointments response:", response);
-      console.log("Appointments data:", response.data);
 
-      // Handle both direct response and nested data property
-      const appointmentsData = response.data || response;
+      // The API returns a paginated response, the appointments are in the `data` property
+      const appointmentsData = response.data;
       setAppointments(Array.isArray(appointmentsData) ? appointmentsData : []);
       setError("");
     } catch (error) {
@@ -187,29 +135,11 @@ const ReceptionistAppointments = () => {
                   const { date, time } = formatDateTime(
                     appointment.scheduledOn
                   );
-                  const patient = patients[appointment.patientId];
-                  const doctor = doctors[appointment.doctorId];
-
-                  console.log("Appointment:", appointment);
-                  console.log(
-                    "Patient ID:",
-                    appointment.patientId,
-                    "Patient:",
-                    patient
-                  );
-                  console.log(
-                    "Doctor ID:",
-                    appointment.doctorId,
-                    "Doctor:",
-                    doctor
-                  );
 
                   return (
                     <tr key={appointment.apptId}>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900 overflow-hidden text-ellipsis">
-                        {patient
-                          ? `${patient.firstName} ${patient.lastName}`
-                          : `Patient ID: ${appointment.patientId}`}
+                        {appointment.patient}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">
                         {date}
@@ -218,9 +148,7 @@ const ReceptionistAppointments = () => {
                         {time}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">
-                        {doctor
-                          ? `Dr. ${doctor.firstName} ${doctor.lastName}`
-                          : `Doctor ID: ${appointment.doctorId}`}
+                        {`Dr. ${appointment.doctor}`}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">
                         <div className="flex space-x-2">
