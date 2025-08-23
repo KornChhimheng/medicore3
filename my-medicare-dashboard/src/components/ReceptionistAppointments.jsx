@@ -38,12 +38,20 @@ const ReceptionistAppointments = () => {
 
       if (patientsData && Array.isArray(patientsData)) {
         patientsData.forEach((patient) => {
+          if (patient.user) {
+            patient.firstName = patient.user.firstName;
+            patient.lastName = patient.user.lastName;
+          }
           patientsMap[patient.patientId] = patient;
         });
       }
 
       if (doctorsData && Array.isArray(doctorsData)) {
         doctorsData.forEach((doctor) => {
+          if (doctor.user) {
+            doctor.firstName = doctor.user.firstName;
+            doctor.lastName = doctor.user.lastName;
+          }
           doctorsMap[doctor.doctorId] = doctor;
         });
       }
