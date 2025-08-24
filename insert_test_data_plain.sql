@@ -7,8 +7,7 @@ INSERT INTO roles (id, name) VALUES
 (1, 'ADMIN'),
 (2, 'DOCTOR'),
 (3, 'PATIENT'),
-(4, 'RECEPTIONIST')
-ON CONFLICT DO NOTHING;
+(4, 'RECEPTIONIST');
 
 -- Insert permissions
 INSERT INTO permission (id, name) VALUES 
@@ -18,8 +17,7 @@ INSERT INTO permission (id, name) VALUES
 (4, 'WRITE_DOCTOR'),
 (5, 'READ_APPOINTMENT'),
 (6, 'WRITE_APPOINTMENT'),
-(7, 'ADMIN_ACCESS')
-ON CONFLICT DO NOTHING;
+(7, 'ADMIN_ACCESS');
 
 -- Insert roles_permissions mappings
 INSERT INTO roles_permissions (role_id, permissions_id) VALUES 
@@ -30,8 +28,7 @@ INSERT INTO roles_permissions (role_id, permissions_id) VALUES
 -- PATIENT can read their own data and appointments
 (3, 1), (3, 5),
 -- RECEPTIONIST can read/write patients and appointments
-(4, 1), (4, 2), (4, 5), (4, 6)
-ON CONFLICT DO NOTHING;
+(4, 1), (4, 2), (4, 5), (4, 6);
 
 -- Insert sample users with plain text passwords for testing
 INSERT INTO users (id, email, first_name, last_name, password, gender, role_id) VALUES

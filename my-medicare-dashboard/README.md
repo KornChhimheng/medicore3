@@ -28,22 +28,33 @@ A modern React-based hospital management system dashboard with separate interfac
 ```
 my-medicare-dashboard/
 ├── src/
-│   ├── components/           # Reusable UI components
-│   │   ├── AppointmentsTable.jsx
-│   │   ├── BillingHistoryTable.jsx
+│   ├── common/              # Shared reusable components
 │   │   ├── Header.jsx
 │   │   ├── InfoCards.jsx
 │   │   ├── MedicationLookup.jsx
-│   │   ├── ReceptionistAppointments.jsx
-│   │   ├── ReceptionistWelcomeCard.jsx
-│   │   ├── RegisterPatientForm.jsx
 │   │   ├── Sidebar.jsx
-│   │   └── WelcomeCard.jsx
-│   ├── pages/               # Main page components
-│   │   ├── PatientDashboard.jsx
-│   │   ├── ReceptionistDashboard.jsx
-│   │   ├── BillingPage.jsx
-│   │   └── PrescriptionsPage.jsx
+│   │   └── AuthModal.jsx
+│   ├── patient/             # Patient-specific app
+│   │   ├── PatientApp.jsx   # Router + layout for patient dashboard
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── BillingPage.jsx
+│   │   │   └── PrescriptionsPage.jsx
+│   │   └── components/
+│   │       ├── WelcomeCard.jsx
+│   │       ├── AppointmentsTable.jsx
+│   │       └── BillingHistoryTable.jsx
+│   ├── receptionist/        # Receptionist-specific app
+│   │   ├── ReceptionistApp.jsx # Router + layout for receptionist dashboard
+│   │   ├── pages/
+│   │   │   └── Dashboard.jsx
+│   │   └── components/
+│   │       ├── ReceptionistAppointments.jsx
+│   │       ├── RegisterPatientForm.jsx
+│   │       ├── ReceptionistWelcomeCard.jsx
+│   │       ├── PatientManagementPage.jsx
+│   │       ├── CreateAppointmentForm.jsx
+│   │       └── AppointmentsPage.jsx
 │   ├── services/            # API services
 │   │   └── apiService.js
 │   ├── App.jsx             # Main app with routing
@@ -55,10 +66,17 @@ my-medicare-dashboard/
 The application uses React Router with the following routes:
 
 - `/` → Redirects to `/patient`
-- `/patient` → Patient Dashboard
-- `/receptionist` → Receptionist Dashboard
-- `/billing` → Billing Management (static)
-- `/prescriptions` → Prescriptions Management (static)
+- `/patient/*` → Patient Dashboard and sub-routes
+- `/receptionist/*` → Receptionist Dashboard and sub-routes
+
+Patient sub-routes:
+- `/patient/` → Patient Dashboard
+- `/patient/billing` → Patient Billing Page
+- `/patient/prescriptions` → Patient Prescriptions Page
+
+Receptionist sub-routes:
+- `/receptionist/` → Receptionist Dashboard
+- `/receptionist/patients` → Patient Management Page
 
 ## 🔧 API Integration
 

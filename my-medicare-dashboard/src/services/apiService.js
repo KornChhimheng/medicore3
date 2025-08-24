@@ -87,7 +87,7 @@ export const appointmentAPI = {
 
   // Delete appointment
   deleteAppointment: async (id) => {
-    const response = await apiClient.delete(`/api/delete-appointment/id=${id}`);
+    const response = await apiClient.delete(`/api/appointment/${id}`);
     return response.data;
   },
 };
