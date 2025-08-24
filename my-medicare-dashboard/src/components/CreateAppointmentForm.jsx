@@ -171,8 +171,7 @@ const CreateAppointmentForm = ({ onAppointmentCreated }) => {
             <option value="">Select a doctor</option>
             {doctors.map((doctor) => (
               <option key={doctor.doctorId} value={doctor.doctorId}>
-                Dr. {doctor.firstName} {doctor.lastName} -{" "}
-                {doctor.specialization}
+                Dr. {doctor.fullName} - {doctor.specialization}
               </option>
             ))}
           </select>
@@ -197,7 +196,7 @@ const CreateAppointmentForm = ({ onAppointmentCreated }) => {
             <option value="">Select a patient</option>
             {patients.map((patient) => (
               <option key={patient.patientId} value={patient.patientId}>
-                {patient.firstName} {patient.lastName} - {patient.contactNumber}
+                {patient.fullName} - {patient.contactNumber}
               </option>
             ))}
           </select>

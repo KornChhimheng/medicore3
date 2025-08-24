@@ -38,10 +38,6 @@ const ReceptionistAppointments = () => {
 
       if (patientsData && Array.isArray(patientsData)) {
         patientsData.forEach((patient) => {
-          if (patient.user) {
-            patient.firstName = patient.user.firstName;
-            patient.lastName = patient.user.lastName;
-          }
           patientsMap[patient.patientId] = patient;
         });
       }
@@ -208,7 +204,7 @@ const ReceptionistAppointments = () => {
                     <tr key={appointment.apptId}>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900 overflow-hidden text-ellipsis">
                         {patient
-                          ? `${patient.firstName} ${patient.lastName}`
+                          ? patient.fullName
                           : `Patient ID: ${appointment.patientId}`}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">
@@ -219,7 +215,7 @@ const ReceptionistAppointments = () => {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">
                         {doctor
-                          ? `Dr. ${doctor.firstName} ${doctor.lastName}`
+                          ? `Dr. ${doctor.fullName}`
                           : `Doctor ID: ${appointment.doctorId}`}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600 overflow-hidden text-ellipsis">

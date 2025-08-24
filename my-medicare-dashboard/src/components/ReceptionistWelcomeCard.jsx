@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 // IMPORTANT: Import your receptionist image here.
 // Replace 'your-receptionist-image.png' with the actual filename of your image.
-import receptionistImage from '../assets/doctor.png'; // Example path, adjust if your image is elsewhere
+import receptionistImage from "../assets/doctor.png"; // Example path, adjust if your image is elsewhere
 
 const ReceptionistWelcomeCard = () => {
   const [imageSrc, setImageSrc] = React.useState(receptionistImage);
@@ -15,12 +15,14 @@ const ReceptionistWelcomeCard = () => {
     <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-6 rounded-2xl shadow-lg mb-8 flex items-center justify-between">
       <div>
         <p className="text-lg mb-1">Good Morning,</p>
-        <h2 className="text-4xl font-extrabold mb-2">Miss. Vicheka</h2> {/* Name can be dynamic later */}
+        <h2 className="text-4xl font-extrabold mb-2">Miss. Vicheka</h2>{" "}
+        {/* Name can be dynamic later */}
         <p className="text-xl mb-4">Today's tasks</p>
-
         {/* Task Summary Cards - similar to InfoCards, but embedded directly or in a sub-component */}
         <div className="flex space-x-4">
-          <div className="bg-teal-500 p-4 rounded-xl flex items-center"> {/* Greenish-blue for Appointments */}
+          <div className="bg-teal-500 p-4 rounded-xl flex items-center">
+            {" "}
+            {/* Greenish-blue for Appointments */}
             <svg
               className="w-8 h-8 mr-2"
               fill="currentColor"
@@ -34,7 +36,9 @@ const ReceptionistWelcomeCard = () => {
               <p className="text-sm">Appointments</p>
             </div>
           </div>
-          <div className="bg-orange-500 p-4 rounded-xl flex items-center"> {/* Orange for Billing */}
+          <div className="bg-orange-500 p-4 rounded-xl flex items-center">
+            {" "}
+            {/* Orange for Billing */}
             <svg
               className="w-8 h-8 mr-2"
               fill="currentColor"
